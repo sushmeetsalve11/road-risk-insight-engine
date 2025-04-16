@@ -4,38 +4,7 @@ import { Footer } from "@/components/layout/Footer";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer, PieChart, Pie, Cell } from "recharts";
-
-const weatherData = [
-  { name: "Rain", value: 35 },
-  { name: "Snow", value: 15 },
-  { name: "Fog", value: 12 },
-  { name: "Clear", value: 8 },
-  { name: "Cloudy", value: 5 },
-];
-
-const timeData = [
-  { name: "Rush Hour", value: 40 },
-  { name: "Night", value: 25 },
-  { name: "Weekend", value: 20 },
-  { name: "Holiday", value: 15 },
-];
-
-const roadData = [
-  { name: "Intersection", value: 30 },
-  { name: "Highway", value: 25 },
-  { name: "Rural Road", value: 20 },
-  { name: "Bridge", value: 15 },
-  { name: "Construction", value: 10 },
-];
-
-const driverData = [
-  { name: "Distracted", value: 35 },
-  { name: "Speeding", value: 30 },
-  { name: "Intoxicated", value: 25 },
-  { name: "Fatigue", value: 10 },
-];
-
-const COLORS = ['#0088FE', '#00C49F', '#FFBB28', '#FF8042', '#8884D8'];
+import { weatherData, timeData, roadData, driverData, COLORS } from "@/data/mockData";
 
 const RiskFactors = () => {
   return (
@@ -225,6 +194,6 @@ const RiskFactors = () => {
       <Footer />
     </div>
   );
-};
+}
 
 export default RiskFactors;

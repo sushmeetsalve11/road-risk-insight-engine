@@ -3,29 +3,7 @@ import { useState } from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { BarChart, Bar, XAxis, YAxis, Tooltip, ResponsiveContainer, PieChart, Pie, Cell, Legend } from "recharts";
-
-const riskFactorData = [
-  { name: "Poor Weather", value: 35 },
-  { name: "Speeding", value: 25 },
-  { name: "Distracted Driving", value: 20 },
-  { name: "Road Conditions", value: 12 },
-  { name: "Vehicle Failure", value: 8 },
-];
-
-const severityData = [
-  { name: "Fatal", value: 15, color: "#ef4444" },
-  { name: "Serious", value: 30, color: "#f59e0b" },
-  { name: "Minor", value: 55, color: "#3b82f6" },
-];
-
-const timeOfDayData = [
-  { name: "12am-4am", value: 15 },
-  { name: "4am-8am", value: 22 },
-  { name: "8am-12pm", value: 18 },
-  { name: "12pm-4pm", value: 16 },
-  { name: "4pm-8pm", value: 26 },
-  { name: "8pm-12am", value: 13 },
-];
+import { riskFactorData, severityData, timeOfDayData } from "@/data/mockData";
 
 export function RiskFactorsChart() {
   const [activeTab, setActiveTab] = useState("factors");

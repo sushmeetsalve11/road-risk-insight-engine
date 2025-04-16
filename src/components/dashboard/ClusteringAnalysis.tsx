@@ -1,14 +1,7 @@
 
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { PieChart, Pie, Cell, ResponsiveContainer, Legend, Tooltip } from "recharts";
-
-const clusterData = [
-  { name: "Cluster 1: Urban Intersections", value: 35, color: "#3b82f6" },
-  { name: "Cluster 2: Highway Accidents", value: 25, color: "#0d9488" },
-  { name: "Cluster 3: Weather-Related", value: 20, color: "#f59e0b" },
-  { name: "Cluster 4: Night Accidents", value: 12, color: "#7c3aed" },
-  { name: "Cluster 5: Vehicle Failures", value: 8, color: "#ef4444" },
-];
+import { clusterData } from "@/data/mockData";
 
 export function ClusteringAnalysis() {
   return (

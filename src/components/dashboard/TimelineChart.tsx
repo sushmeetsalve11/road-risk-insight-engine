@@ -1,21 +1,7 @@
 
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from "recharts";
-
-const monthlyData = [
-  { name: "Jan", accidents: 65, riskIndex: 42 },
-  { name: "Feb", accidents: 59, riskIndex: 38 },
-  { name: "Mar", accidents: 80, riskIndex: 52 },
-  { name: "Apr", accidents: 81, riskIndex: 53 },
-  { name: "May", accidents: 76, riskIndex: 49 },
-  { name: "Jun", accidents: 55, riskIndex: 36 },
-  { name: "Jul", accidents: 40, riskIndex: 26 },
-  { name: "Aug", accidents: 35, riskIndex: 23 },
-  { name: "Sep", accidents: 48, riskIndex: 31 },
-  { name: "Oct", accidents: 65, riskIndex: 42 },
-  { name: "Nov", accidents: 70, riskIndex: 45 },
-  { name: "Dec", accidents: 85, riskIndex: 55 },
-];
+import { monthlyData } from "@/data/mockData";
 
 export function TimelineChart() {
   return (

@@ -8,6 +8,7 @@ import { TimelineChart } from "@/components/dashboard/TimelineChart";
 import { RiskPredictionCard } from "@/components/dashboard/RiskPredictionCard";
 import { StatCard } from "@/components/dashboard/StatCard";
 import { AlertTriangle, Calendar, Car, MapPin } from "lucide-react";
+import { statsData } from "@/data/mockData";
 
 const Index = () => {
   return (
@@ -22,29 +23,24 @@ const Index = () => {
           </p>
           
           <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-4">
-            <StatCard 
-              title="Total Accidents" 
-              value="12,548" 
-              icon={<Car />}
-              trend={{ value: 4.5, positive: false }}
-            />
-            <StatCard 
-              title="High Risk Areas" 
-              value="86" 
-              icon={<AlertTriangle />}
-              trend={{ value: 2.1, positive: false }}
-            />
-            <StatCard 
-              title="Monitored Locations" 
-              value="1,247" 
-              icon={<MapPin />}
-              trend={{ value: 12.3, positive: true }}
-            />
-            <StatCard 
-              title="Data Period" 
-              value="12 months" 
-              icon={<Calendar />}
-            />
+            {statsData.map((stat, index) => {
+              const icons = {
+                "Car": <Car />,
+                "AlertTriangle": <AlertTriangle />,
+                "MapPin": <MapPin />,
+                "Calendar": <Calendar />
+              };
+              
+              return (
+                <StatCard 
+                  key={index}
+                  title={stat.title} 
+                  value={stat.value} 
+                  icon={icons[stat.icon as keyof typeof icons]}
+                  trend={stat.trend}
+                />
+              );
+            })}
           </div>
           
           <div className="grid gap-4 md:grid-cols-3">
