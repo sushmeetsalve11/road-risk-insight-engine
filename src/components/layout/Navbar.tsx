@@ -1,7 +1,7 @@
 
 import { useNavigate } from "react-router-dom";
 import { Button } from "@/components/ui/button";
-import { Search, Map, AlertTriangle, Gauge } from "lucide-react";
+import { Map, AlertTriangle, Gauge } from "lucide-react";
 
 export function Navbar() {
   const navigate = useNavigate();
@@ -32,14 +32,8 @@ export function Navbar() {
           </div>
         </nav>
         
-        <div className="flex items-center gap-2">
-          <Button variant="outline" size="sm">
-            <Search className="h-4 w-4" />
-            <span className="ml-2 hidden md:inline-block">Search Data</span>
-          </Button>
-        </div>
+        {/* Search button removed */}
       </div>
     </header>
   );
 }
-
