@@ -64,7 +64,7 @@ export function RiskMap() {
       </CardHeader>
       <CardContent className="p-0 h-[440px]">
         <MapContainer
-          center={[20.5937, 78.9629]} // Center of India
+          center={[20.5937, 78.9629] as L.LatLngExpression} // Center of India with proper type
           zoom={5}
           style={{ height: "100%", width: "100%", borderRadius: "0 0 0.5rem 0.5rem" }}
         >
@@ -76,7 +76,7 @@ export function RiskMap() {
           {indianAccidentData.map((accident, index) => (
             <Marker 
               key={index} 
-              position={[accident.lat, accident.lng]} 
+              position={[accident.lat, accident.lng] as L.LatLngExpression} 
               icon={getMarkerColor(accident.severity)}
             >
               <Popup>
