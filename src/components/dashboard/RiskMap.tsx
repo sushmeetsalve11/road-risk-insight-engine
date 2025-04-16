@@ -18,13 +18,15 @@ let DefaultIcon = L.icon({
 
 L.Marker.prototype.options.icon = DefaultIcon;
 
-// Sample accident data
-const sampleAccidentData = [
-  { lng: -122.4194, lat: 37.7749, severity: "high", description: "Major collision" },
-  { lng: -122.4124, lat: 37.7834, severity: "medium", description: "Vehicle skidding" },
-  { lng: -122.4314, lat: 37.7654, severity: "low", description: "Minor accident" },
-  { lng: -122.4104, lat: 37.7919, severity: "high", description: "Multi-vehicle crash" },
-  { lng: -122.4432, lat: 37.7724, severity: "medium", description: "Road hazard accident" },
+// Sample Indian accident data (major cities)
+const indianAccidentData = [
+  { lng: 77.2090, lat: 28.6139, severity: "high", description: "Major collision in Delhi" },
+  { lng: 72.8777, lat: 19.0760, severity: "high", description: "Multi-vehicle crash in Mumbai" },
+  { lng: 77.5946, lat: 12.9716, severity: "medium", description: "Vehicle skidding in Bangalore" },
+  { lng: 80.2707, lat: 13.0827, severity: "medium", description: "Road hazard accident in Chennai" },
+  { lng: 88.3639, lat: 22.5726, severity: "low", description: "Minor accident in Kolkata" },
+  { lng: 78.4867, lat: 17.3850, severity: "high", description: "Highway collision in Hyderabad" },
+  { lng: 73.8567, lat: 18.5204, severity: "low", description: "Single vehicle incident in Pune" },
 ];
 
 export function RiskMap() {
@@ -58,12 +60,12 @@ export function RiskMap() {
   return (
     <Card className="col-span-3 h-[500px]">
       <CardHeader>
-        <CardTitle>Accident Risk Map</CardTitle>
+        <CardTitle>India Accident Risk Map</CardTitle>
       </CardHeader>
       <CardContent className="p-0 h-[440px]">
         <MapContainer
-          center={[37.7749, -122.4194]} // San Francisco coordinates
-          zoom={13}
+          center={[20.5937, 78.9629]} // Center of India
+          zoom={5}
           style={{ height: "100%", width: "100%", borderRadius: "0 0 0.5rem 0.5rem" }}
         >
           <TileLayer
@@ -71,7 +73,7 @@ export function RiskMap() {
             url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
           />
           
-          {sampleAccidentData.map((accident, index) => (
+          {indianAccidentData.map((accident, index) => (
             <Marker 
               key={index} 
               position={[accident.lat, accident.lng]} 
