@@ -1,7 +1,7 @@
 
 import { useEffect, useRef, useState } from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { MapContainer, TileLayer, Marker, Popup } from "react-leaflet";
+import { MapContainer, TileLayer, Marker, Popup, useMap } from "react-leaflet";
 import L from "leaflet";
 import "leaflet/dist/leaflet.css";
 
@@ -28,6 +28,15 @@ const indianAccidentData = [
   { lng: 78.4867, lat: 17.3850, severity: "high", description: "Highway collision in Hyderabad" },
   { lng: 73.8567, lat: 18.5204, severity: "low", description: "Single vehicle incident in Pune" },
 ];
+
+// This component helps set the initial center and zoom
+const MapCenterSetter = ({ center, zoom }: { center: [number, number], zoom: number }) => {
+  const map = useMap();
+  useEffect(() => {
+    map.setView(center, zoom);
+  }, [map, center, zoom]);
+  return null;
+};
 
 export function RiskMap() {
   // Helper function to get marker color based on severity
@@ -64,19 +73,18 @@ export function RiskMap() {
       </CardHeader>
       <CardContent className="p-0 h-[440px]">
         <MapContainer
-          center={[20.5937, 78.9629] as [number, number]}
-          zoom={5}
           style={{ height: "100%", width: "100%", borderRadius: "0 0 0.5rem 0.5rem" }}
         >
+          <MapCenterSetter center={[20.5937, 78.9629]} zoom={5} />
           <TileLayer
-            attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
             url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+            attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
           />
           
           {indianAccidentData.map((accident, index) => (
             <Marker 
               key={index} 
-              position={[accident.lat, accident.lng] as [number, number]} 
+              position={[accident.lat, accident.lng]} 
               icon={getMarkerColor(accident.severity)}
             >
               <Popup>
