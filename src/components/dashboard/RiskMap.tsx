@@ -1,120 +1,59 @@
 
 import { useEffect, useRef, useState } from "react";
-import mapboxgl from "mapbox-gl";
-import "mapbox-gl/dist/mapbox-gl.css";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { MapContainer, TileLayer, Marker, Popup } from "react-leaflet";
+import L from "leaflet";
+import "leaflet/dist/leaflet.css";
 
-// This would normally be stored in an environment variable
-// For the demo, we'll use a placeholder - users should replace with their own token
-const MAPBOX_TOKEN = "YOUR_MAPBOX_TOKEN";
+// Fix for Leaflet marker icon issue
+import icon from "leaflet/dist/images/marker-icon.png";
+import iconShadow from "leaflet/dist/images/marker-shadow.png";
 
-interface MapConfig {
-  latitude: number;
-  longitude: number;
-  zoom: number;
-}
+let DefaultIcon = L.icon({
+  iconUrl: icon,
+  shadowUrl: iconShadow,
+  iconSize: [25, 41],
+  iconAnchor: [12, 41],
+});
+
+L.Marker.prototype.options.icon = DefaultIcon;
+
+// Sample accident data
+const sampleAccidentData = [
+  { lng: -122.4194, lat: 37.7749, severity: "high", description: "Major collision" },
+  { lng: -122.4124, lat: 37.7834, severity: "medium", description: "Vehicle skidding" },
+  { lng: -122.4314, lat: 37.7654, severity: "low", description: "Minor accident" },
+  { lng: -122.4104, lat: 37.7919, severity: "high", description: "Multi-vehicle crash" },
+  { lng: -122.4432, lat: 37.7724, severity: "medium", description: "Road hazard accident" },
+];
 
 export function RiskMap() {
-  const mapContainer = useRef<HTMLDivElement>(null);
-  const map = useRef<mapboxgl.Map | null>(null);
-  const [mapConfig] = useState<MapConfig>({
-    latitude: 37.7749,
-    longitude: -122.4194, // San Francisco coordinates as example
-    zoom: 10,
-  });
-  const [mapTokenInput, setMapTokenInput] = useState("");
-  const [mapToken, setMapToken] = useState<string | null>(MAPBOX_TOKEN !== "YOUR_MAPBOX_TOKEN" ? MAPBOX_TOKEN : null);
-
-  useEffect(() => {
-    if (!mapContainer.current || !mapToken) return;
-
-    if (map.current) return; // Map already initialized
-
-    mapboxgl.accessToken = mapToken;
-    
-    map.current = new mapboxgl.Map({
-      container: mapContainer.current,
-      style: "mapbox://styles/mapbox/light-v11",
-      center: [mapConfig.longitude, mapConfig.latitude],
-      zoom: mapConfig.zoom,
-      pitch: 45,
-    });
-
-    map.current.addControl(
-      new mapboxgl.NavigationControl({
-        visualizePitch: true,
-      }),
-      "top-right"
-    );
-
-    // Add sample accident data points (this would come from your API/dataset)
-    const sampleAccidentData = [
-      { lng: -122.4194, lat: 37.7749, severity: "high" },
-      { lng: -122.4124, lat: 37.7834, severity: "medium" },
-      { lng: -122.4314, lat: 37.7654, severity: "low" },
-      { lng: -122.4104, lat: 37.7919, severity: "high" },
-      { lng: -122.4432, lat: 37.7724, severity: "medium" },
-    ];
-
-    // Add markers for each accident
-    sampleAccidentData.forEach((accident) => {
-      const markerColor = 
-        accident.severity === "high" ? "#ef4444" : 
-        accident.severity === "medium" ? "#f59e0b" : "#3b82f6";
-        
-      const markerElement = document.createElement('div');
-      markerElement.className = 'accident-marker';
-      markerElement.style.width = '15px';
-      markerElement.style.height = '15px';
-      markerElement.style.borderRadius = '50%';
-      markerElement.style.backgroundColor = markerColor;
-      markerElement.style.border = '2px solid white';
-      markerElement.style.boxShadow = '0 0 5px rgba(0,0,0,0.3)';
-      
-      new mapboxgl.Marker(markerElement)
-        .setLngLat([accident.lng, accident.lat])
-        .addTo(map.current!);
-    });
-
-    return () => {
-      if (map.current) {
-        map.current.remove();
-        map.current = null;
-      }
-    };
-  }, [mapConfig, mapToken]);
-
-  // Provide a UI for users to input their Mapbox token if needed
-  if (!mapToken && MAPBOX_TOKEN === "YOUR_MAPBOX_TOKEN") {
-    return (
-      <Card className="col-span-3 h-[500px]">
-        <CardHeader>
-          <CardTitle>Accident Risk Map</CardTitle>
-        </CardHeader>
-        <CardContent className="flex flex-col items-center justify-center h-[400px]">
-          <div className="text-center mb-4 max-w-md">
-            <p className="mb-2">To view the interactive map, please enter your Mapbox token:</p>
-            <p className="text-xs text-muted-foreground mb-4">
-              Get your free token at <a href="https://mapbox.com/" target="_blank" rel="noopener noreferrer" className="text-primary underline">mapbox.com</a>
-            </p>
-            <input 
-              type="text" 
-              value={mapTokenInput} 
-              onChange={(e) => setMapTokenInput(e.target.value)} 
-              placeholder="pk.eyJ1..." 
-              className="w-full p-2 border rounded mb-2" 
-            />
-            <button 
-              onClick={() => setMapToken(mapTokenInput)}
-              className="bg-primary text-white py-2 px-4 rounded"
-            >
-              Load Map
-            </button>
-          </div>
-        </CardContent>
-      </Card>
-    );
-  }
+  // Helper function to get marker color based on severity
+  const getMarkerColor = (severity: string) => {
+    switch (severity) {
+      case "high":
+        return L.divIcon({
+          className: "custom-div-icon",
+          html: `<div style="background-color: #ef4444; width: 15px; height: 15px; border-radius: 50%; border: 2px solid white; box-shadow: 0 0 5px rgba(0,0,0,0.3);"></div>`,
+          iconSize: [15, 15],
+          iconAnchor: [7, 7],
+        });
+      case "medium":
+        return L.divIcon({
+          className: "custom-div-icon",
+          html: `<div style="background-color: #f59e0b; width: 15px; height: 15px; border-radius: 50%; border: 2px solid white; box-shadow: 0 0 5px rgba(0,0,0,0.3);"></div>`,
+          iconSize: [15, 15],
+          iconAnchor: [7, 7],
+        });
+      default:
+        return L.divIcon({
+          className: "custom-div-icon",
+          html: `<div style="background-color: #3b82f6; width: 15px; height: 15px; border-radius: 50%; border: 2px solid white; box-shadow: 0 0 5px rgba(0,0,0,0.3);"></div>`,
+          iconSize: [15, 15],
+          iconAnchor: [7, 7],
+        });
+    }
+  };
 
   return (
     <Card className="col-span-3 h-[500px]">
@@ -122,7 +61,31 @@ export function RiskMap() {
         <CardTitle>Accident Risk Map</CardTitle>
       </CardHeader>
       <CardContent className="p-0 h-[440px]">
-        <div ref={mapContainer} className="w-full h-full rounded-b-lg" />
+        <MapContainer
+          center={[37.7749, -122.4194]} // San Francisco coordinates
+          zoom={13}
+          style={{ height: "100%", width: "100%", borderRadius: "0 0 0.5rem 0.5rem" }}
+        >
+          <TileLayer
+            attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+            url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+          />
+          
+          {sampleAccidentData.map((accident, index) => (
+            <Marker 
+              key={index} 
+              position={[accident.lat, accident.lng]} 
+              icon={getMarkerColor(accident.severity)}
+            >
+              <Popup>
+                <div>
+                  <h3 className="font-semibold">{accident.severity.charAt(0).toUpperCase() + accident.severity.slice(1)} Risk Area</h3>
+                  <p>{accident.description}</p>
+                </div>
+              </Popup>
+            </Marker>
+          ))}
+        </MapContainer>
       </CardContent>
     </Card>
   );
