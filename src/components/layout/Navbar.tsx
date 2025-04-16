@@ -1,7 +1,7 @@
 
 import { useNavigate } from "react-router-dom";
 import { Button } from "@/components/ui/button";
-import { Search, Map, BarChart, AlertTriangle, Gauge } from "lucide-react";
+import { Search, Map, AlertTriangle, Gauge } from "lucide-react";
 
 export function Navbar() {
   const navigate = useNavigate();
@@ -20,10 +20,6 @@ export function Navbar() {
             <Button variant="ghost" size="sm" onClick={() => navigate("/")}>
               <Map className="mr-2 h-4 w-4" />
               Dashboard
-            </Button>
-            <Button variant="ghost" size="sm" onClick={() => navigate("/analysis")}>
-              <BarChart className="mr-2 h-4 w-4" />
-              Analysis
             </Button>
             <Button variant="ghost" size="sm" onClick={() => navigate("/risk-factors")}>
               <AlertTriangle className="mr-2 h-4 w-4" />
@@ -46,3 +42,4 @@ export function Navbar() {
     </header>
   );
 }
+
