@@ -1,23 +1,86 @@
-
+import React, { useMemo } from 'react';
 import { Navbar } from "@/components/layout/Navbar";
 import { Footer } from "@/components/layout/Footer";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer, PieChart, Pie, Cell } from "recharts";
+import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer, PieChart, Pie, Cell, ScatterChart, Scatter } from "recharts";
 import { weatherData, timeData, roadData, driverData, COLORS } from "@/data/mockData";
+import { Badge } from "@/components/ui/badge";
 
 const RiskFactors = () => {
+  // Compute statistical summaries
+  const summaries = useMemo(() => {
+    const citySeverityCounts = {
+      Chennai: { low: 0, medium: 0, high: 0 },
+      Hyderabad: { low: 0, medium: 0, high: 0 },
+      Pune: { low: 0, medium: 0, high: 0 },
+      Mumbai: { low: 0, medium: 0, high: 0 },
+      Bangalore: { low: 0, medium: 0, high: 0 },
+      Kolkata: { low: 0, medium: 0, high: 0 },
+      Delhi: { low: 0, medium: 0, high: 0 }
+    };
+
+    return {
+      citySeverityCounts,
+      topRiskyCities: Object.entries(citySeverityCounts)
+        .map(([city, counts]) => ({
+          city,
+          totalRisks: counts.medium + counts.high,
+          highRiskPercentage: ((counts.high / (counts.low + counts.medium + counts.high)) * 100).toFixed(2)
+        }))
+        .sort((a, b) => Number(b.highRiskPercentage) - Number(a.highRiskPercentage))
+    };
+  }, []);
+
   return (
     <div className="min-h-screen flex flex-col">
       <Navbar />
       
       <main className="flex-1 container py-6">
         <div className="flex flex-col gap-4">
-          <h1 className="text-3xl font-bold tracking-tight">Risk Factor Analysis</h1>
+          <h1 className="text-3xl font-bold tracking-tight">Exploratory Data Analysis</h1>
           <p className="text-muted-foreground">
-            Detailed breakdown of factors contributing to accident risk.
+            Comprehensive insights into accident risk factors and patterns
           </p>
           
+          <Card>
+            <CardHeader>
+              <CardTitle>City Risk Overview</CardTitle>
+              <CardDescription>Statistical analysis of accident risks across cities</CardDescription>
+            </CardHeader>
+            <CardContent>
+              <div className="grid md:grid-cols-2 gap-4">
+                <div>
+                  <h3 className="text-lg font-medium mb-2">Top Risky Cities Ranking</h3>
+                  {summaries.topRiskyCities.map((cityRisk, index) => (
+                    <div key={cityRisk.city} className="flex justify-between items-center mb-2">
+                      <div className="flex items-center">
+                        <Badge variant={index === 0 ? "destructive" : "secondary"} className="mr-2">
+                          #{index + 1}
+                        </Badge>
+                        {cityRisk.city}
+                      </div>
+                      <span className="text-muted-foreground">
+                        {cityRisk.highRiskPercentage}% High Risk
+                      </span>
+                    </div>
+                  ))}
+                </div>
+                <div className="h-[300px]">
+                  <ResponsiveContainer width="100%" height="100%">
+                    <ScatterChart>
+                      <CartesianGrid />
+                      <XAxis type="category" dataKey="city" />
+                      <YAxis type="number" dataKey="highRiskPercentage" />
+                      <Tooltip cursor={{ strokeDasharray: '3 3' }} />
+                      <Scatter data={summaries.topRiskyCities} fill="#8884d8" />
+                    </ScatterChart>
+                  </ResponsiveContainer>
+                </div>
+              </div>
+            </CardContent>
+          </Card>
+
           <Card>
             <CardHeader>
               <CardTitle>Risk Categories</CardTitle>
