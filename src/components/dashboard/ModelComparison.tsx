@@ -24,8 +24,13 @@ export function ModelComparison({ metrics, selectedModel }: {
   metrics: { type: string; metrics: { accuracy: number; precision: number; recall: number; f1Score: number; } }[];
   selectedModel: string;
 }) {
-  // Filter to only show models that are being used
-  const activeModels = metrics.filter(m => m.type === selectedModel || m.type === "Random Forest" || m.type === "KNN" || m.type === "Gradient Boosting");
+  // Filter to only show active models (Neural Network, Random Forest, KNN, Gradient Boosting)
+  const activeModels = metrics.filter(m => 
+    m.type === "Neural Network" || 
+    m.type === "Random Forest" || 
+    m.type === "KNN" || 
+    m.type === "Gradient Boosting"
+  );
   
   const metricsData: MetricsData[] = activeModels.map(m => ({
     modelName: m.type,
