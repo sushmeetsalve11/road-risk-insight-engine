@@ -1,3 +1,4 @@
+
 // Mock dataset for Road Risk Insight Engine
 
 // Risk Map Data - Indian cities accidents
@@ -163,4 +164,71 @@ export const indianAccidentData = [
   { id: 159, city: "Chennai", lat: 13.0494, lng: 80.2472, severity: "medium", description: "Medium accident near Chennai" },
   { id: 160, city: "Mumbai", lat: 19.0452, lng: 72.9134, severity: "high", description: "High accident near Mumbai" },
   { id: 161, city: "Chennai", lat: 13.105, lng: 80.2801, severity: "low", description: "Low accident near Chennai" },
-  { id: 162, city: "Mumbai", lat: 1
+  { id: 162, city: "Mumbai", lat: 19.0531, lng: 72.9102, severity: "high", description: "High accident near Mumbai" },
+  { id: 163, city: "Hyderabad", lat: 17.3588, lng: 78.4575, severity: "medium", description: "Medium accident near Hyderabad" },
+  { id: 164, city: "Delhi", lat: 28.6495, lng: 77.2178, severity: "high", description: "High accident near Delhi" },
+  { id: 165, city: "Mumbai", lat: 19.0972, lng: 72.844, severity: "low", description: "Low accident near Mumbai" }
+];
+
+// Add cityStats for risk factors
+export const cityStats = {
+  "Mumbai": { accidentRate: 0.78, populationDensity: 0.94, trafficDensity: 0.92 },
+  "Delhi": { accidentRate: 0.82, populationDensity: 0.84, trafficDensity: 0.88 },
+  "Bangalore": { accidentRate: 0.65, populationDensity: 0.72, trafficDensity: 0.81 },
+  "Hyderabad": { accidentRate: 0.67, populationDensity: 0.68, trafficDensity: 0.75 },
+  "Chennai": { accidentRate: 0.62, populationDensity: 0.66, trafficDensity: 0.71 },
+  "Kolkata": { accidentRate: 0.71, populationDensity: 0.90, trafficDensity: 0.85 },
+  "Pune": { accidentRate: 0.58, populationDensity: 0.61, trafficDensity: 0.68 }
+};
+
+// Weather-related risk factors
+export const weatherRiskFactors = {
+  "clear": 0.3,
+  "rain": 0.7,
+  "fog": 0.8,
+  "snow": 0.65,
+  "hail": 0.75,
+  "storm": 0.9
+};
+
+// Time-related risk factors
+export const timeRiskFactors = {
+  "morning": 0.6,    // 6-10am (rush hour)
+  "midday": 0.4,     // 10am-3pm
+  "evening": 0.75,   // 3-8pm (rush hour)
+  "night": 0.85      // 8pm-6am
+};
+
+// Chart data for different risk categories
+export const weatherData = [
+  { name: "Rain", value: 35 },
+  { name: "Fog", value: 20 },
+  { name: "Clear", value: 15 },
+  { name: "Snow", value: 10 },
+  { name: "Storm", value: 20 }
+];
+
+export const timeData = [
+  { name: "Rush Hour", value: 40 },
+  { name: "Night", value: 25 },
+  { name: "Weekends", value: 20 },
+  { name: "Holidays", value: 15 }
+];
+
+export const roadData = [
+  { name: "Intersections", value: 30 },
+  { name: "Highways", value: 25 },
+  { name: "Rural Roads", value: 20 },
+  { name: "Bridges", value: 15 },
+  { name: "Construction", value: 10 }
+];
+
+export const driverData = [
+  { name: "Distracted", value: 35 },
+  { name: "Speeding", value: 30 },
+  { name: "Intoxicated", value: 25 },
+  { name: "Fatigue", value: 10 }
+];
+
+// Chart colors
+export const COLORS = ['#0088FE', '#00C49F', '#FFBB28', '#FF8042', '#8884d8', '#82ca9d', '#ffc658'];
