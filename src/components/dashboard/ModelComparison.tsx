@@ -1,7 +1,7 @@
 
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from 'recharts';
-import { CircleCheck, CircleX, Info } from "lucide-react";
+import { CircleCheck, Info } from "lucide-react";
 import {
   Tooltip as UITooltip,
   TooltipContent,
@@ -24,7 +24,10 @@ export function ModelComparison({ metrics, selectedModel }: {
   metrics: { type: string; metrics: { accuracy: number; precision: number; recall: number; f1Score: number; } }[];
   selectedModel: string;
 }) {
-  const metricsData: MetricsData[] = metrics.map(m => ({
+  // Filter to only show models that are being used
+  const activeModels = metrics.filter(m => m.type === selectedModel || m.type === "Random Forest" || m.type === "KNN" || m.type === "Gradient Boosting");
+  
+  const metricsData: MetricsData[] = activeModels.map(m => ({
     modelName: m.type,
     accuracy: m.metrics.accuracy,
     precision: m.metrics.precision,
@@ -37,14 +40,14 @@ export function ModelComparison({ metrics, selectedModel }: {
     <Card>
       <CardHeader>
         <div className="flex items-center justify-between">
-          <CardTitle>Model Performance Comparison</CardTitle>
+          <CardTitle>Active Models Comparison</CardTitle>
           <TooltipProvider>
             <UITooltip>
               <TooltipTrigger>
                 <Info className="h-4 w-4 text-muted-foreground" />
               </TooltipTrigger>
               <TooltipContent>
-                <p>Comparison of different ML models based on key metrics</p>
+                <p>Comparison of active ML models based on key metrics</p>
               </TooltipContent>
             </UITooltip>
           </TooltipProvider>
@@ -84,7 +87,7 @@ export function ModelComparison({ metrics, selectedModel }: {
           </ResponsiveContainer>
         </div>
         
-        <div className="mt-4 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+        <div className="mt-4 grid grid-cols-1 sm:grid-cols-2 gap-4">
           {metricsData.map((model) => (
             <div 
               key={model.modelName}
@@ -94,10 +97,8 @@ export function ModelComparison({ metrics, selectedModel }: {
             >
               <div className="flex items-center justify-between mb-2">
                 <h4 className="font-medium">{model.modelName}</h4>
-                {model.isSelected ? (
+                {model.isSelected && (
                   <CircleCheck className="h-5 w-5 text-primary" />
-                ) : (
-                  <CircleX className="h-5 w-5 text-muted-foreground" />
                 )}
               </div>
               <div className="space-y-1 text-sm">

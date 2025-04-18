@@ -1,3 +1,4 @@
+
 import { useEffect, useRef } from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { MapContainer, TileLayer, Marker, Popup, useMap } from "react-leaflet";
@@ -68,13 +69,14 @@ export function RiskMap() {
           <TileLayer
             attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
             url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+            key="osm-tile"
           />
           
           {indianAccidentData.map((accident, index) => (
             <Marker 
               key={index} 
               position={[accident.lat, accident.lng]} 
-              icon={getMarkerColor(accident.severity)}
+              icon={getMarkerColor(accident.severity) as L.DivIcon}
             >
               <Popup>
                 <div>
