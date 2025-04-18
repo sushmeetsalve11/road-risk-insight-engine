@@ -1,3 +1,4 @@
+
 // Mock dataset for Road Risk Insight Engine
 
 // Risk Map Data - Indian cities accidents
@@ -163,4 +164,79 @@ export const indianAccidentData = [
   { id: 159, city: "Chennai", lat: 13.0494, lng: 80.2472, severity: "medium", description: "Medium accident near Chennai" },
   { id: 160, city: "Mumbai", lat: 19.0452, lng: 72.9134, severity: "high", description: "High accident near Mumbai" },
   { id: 161, city: "Chennai", lat: 13.105, lng: 80.2801, severity: "low", description: "Low accident near Chennai" },
-  { id: 162, city: "Mumbai", lat: 1
+  { id: 162, city: "Mumbai", lat: 19.0642, lng: 72.8517, severity: "medium", description: "Medium accident near Mumbai" },
+  { id: 163, city: "Bangalore", lat: 12.9716, lng: 77.5946, severity: "low", description: "Low accident near Bangalore" }
+];
+
+// Additional mock datasets for dashboard components
+export const clusterData = [
+  // Cluster analysis data
+  { cluster: "High Risk", cities: ["Mumbai", "Delhi", "Kolkata"], risk: 0.85 },
+  { cluster: "Medium Risk", cities: ["Chennai", "Hyderabad", "Pune"], risk: 0.55 },
+  { cluster: "Low Risk", cities: ["Bangalore", "Rural Areas"], risk: 0.25 }
+];
+
+export const riskFactorData = [
+  { name: "Weather", value: 28 },
+  { name: "Time of Day", value: 22 },
+  { name: "Road Type", value: 18 },
+  { name: "Traffic Volume", value: 15 },
+  { name: "Speed Limit", value: 10 },
+  { name: "Vehicle Type", value: 7 }
+];
+
+export const severityData = [
+  { name: "High", value: 35 },
+  { name: "Medium", value: 45 },
+  { name: "Low", value: 20 }
+];
+
+export const timeOfDayData = [
+  { name: "Morning (6-10am)", value: 25 },
+  { name: "Midday (10am-3pm)", value: 20 },
+  { name: "Evening (3-8pm)", value: 35 },
+  { name: "Night (8pm-6am)", value: 20 }
+];
+
+export const monthlyData = [
+  { name: "Jan", accidents: 120 },
+  { name: "Feb", accidents: 105 },
+  { name: "Mar", accidents: 135 },
+  { name: "Apr", accidents: 150 },
+  { name: "May", accidents: 180 },
+  { name: "Jun", accidents: 160 }
+];
+
+export const statsData = [
+  { name: "Total Accidents", value: 1500, trend: { value: 12, positive: true } },
+  { name: "High Risk Areas", value: 8, trend: { value: 3, positive: false } },
+  { name: "Average Severity", value: 2.5, trend: { value: 0.2, positive: true } }
+];
+
+export const cityStats = {
+  Mumbai: { accidentRate: 0.8, populationDensity: 0.9, trafficDensity: 0.85 },
+  Delhi: { accidentRate: 0.75, populationDensity: 0.85, trafficDensity: 0.8 },
+  Kolkata: { accidentRate: 0.65, populationDensity: 0.7, trafficDensity: 0.6 },
+  Chennai: { accidentRate: 0.55, populationDensity: 0.6, trafficDensity: 0.55 },
+  Bangalore: { accidentRate: 0.5, populationDensity: 0.55, trafficDensity: 0.5 },
+  Hyderabad: { accidentRate: 0.6, populationDensity: 0.65, trafficDensity: 0.6 },
+  Pune: { accidentRate: 0.45, populationDensity: 0.5, trafficDensity: 0.45 }
+};
+
+// Add other necessary constants and data exports
+export const COLORS = ['#0088FE', '#00C49F', '#FFBB28', '#FF8042', '#8884D8'];
+
+export const weatherRiskFactors = {
+  clear: 0.3,
+  rain: 0.7,
+  snow: 0.6,
+  fog: 0.8,
+  windy: 0.5
+};
+
+export const timeRiskFactors = {
+  morning: 0.4,
+  midday: 0.3,
+  evening: 0.7,
+  night: 0.8
+};
