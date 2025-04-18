@@ -1,4 +1,3 @@
-
 import { useEffect, useRef } from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { MapContainer, TileLayer, Marker, Popup, useMap } from "react-leaflet";
@@ -69,14 +68,12 @@ export function RiskMap() {
           <TileLayer
             attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
             url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
-            // @ts-ignore - The types for react-leaflet seem to be missing these properties
           />
           
           {indianAccidentData.map((accident, index) => (
             <Marker 
               key={index} 
               position={[accident.lat, accident.lng]} 
-              // @ts-ignore - The types for react-leaflet don't properly include the icon property
               icon={getMarkerColor(accident.severity)}
             >
               <Popup>

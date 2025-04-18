@@ -1,6 +1,7 @@
 import * as tf from '@tensorflow/tfjs';
 import { PredictionInput, PredictionResult, ModelMetrics, FeatureVector } from './mlTypes';
 import { extractFeatures } from './featureExtractor';
+import { cityStats } from '@/data/mockData';
 
 // Random Forest Model (simplified implementation using ensemble of decision trees)
 class RandomForestModel {
@@ -270,3 +271,6 @@ export async function predictRisk(input: PredictionInput): Promise<PredictionRes
     modelUsed: bestModel!.type
   };
 }
+
+// Export types that are used in other components
+export type { PredictionInput, PredictionResult };
