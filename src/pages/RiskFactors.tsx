@@ -12,6 +12,21 @@ import { InfoIcon, TrendingUpIcon, AlertTriangleIcon, BarChart3Icon, PieChartIco
 import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
 
 const RiskFactors = () => {
+  // Helper function to calculate variance in risk factors
+  // Moved this function declaration before it's used in useMemo
+  const calculateFactorVariance = (data) => {
+    const values = data.map(item => item.value);
+    const mean = values.reduce((sum, val) => sum + val, 0) / values.length;
+    const variance = values.reduce((sum, val) => sum + Math.pow(val - mean, 2), 0) / values.length;
+    
+    return {
+      mean: parseFloat(mean.toFixed(2)),
+      variance: parseFloat(variance.toFixed(2)),
+      standardDeviation: parseFloat(Math.sqrt(variance).toFixed(2)),
+      data
+    };
+  };
+
   // Compute statistical summaries
   const summaries = useMemo(() => {
     const cityData = indianAccidentData.reduce((acc, item) => {
@@ -64,20 +79,6 @@ const RiskFactors = () => {
       severityByFactorMap
     };
   }, []);
-
-  // Helper function to calculate variance in risk factors
-  const calculateFactorVariance = (data) => {
-    const values = data.map(item => item.value);
-    const mean = values.reduce((sum, val) => sum + val, 0) / values.length;
-    const variance = values.reduce((sum, val) => sum + Math.pow(val - mean, 2), 0) / values.length;
-    
-    return {
-      mean: parseFloat(mean.toFixed(2)),
-      variance: parseFloat(variance.toFixed(2)),
-      standardDeviation: parseFloat(Math.sqrt(variance).toFixed(2)),
-      data
-    };
-  };
 
   // Compute insights from ML model analysis
   const mlInsights = useMemo(() => {
