@@ -232,3 +232,62 @@ export const driverData = [
 
 // Chart colors
 export const COLORS = ['#0088FE', '#00C49F', '#FFBB28', '#FF8042', '#8884d8', '#82ca9d', '#ffc658'];
+
+// Adding missing exports needed by components
+
+// For ClusteringAnalysis.tsx
+export const clusterData = [
+  { name: "Urban Intersections", value: 35, color: "#0088FE" },
+  { name: "Highway Collisions", value: 25, color: "#00C49F" },
+  { name: "Weather-Related", value: 20, color: "#FFBB28" },
+  { name: "Night Accidents", value: 15, color: "#FF8042" },
+  { name: "Vehicle Failures", value: 5, color: "#8884d8" }
+];
+
+// For RiskFactorsChart.tsx
+export const riskFactorData = [
+  { name: "Speeding", value: 75 },
+  { name: "Distraction", value: 65 },
+  { name: "Weather", value: 50 },
+  { name: "Road Condition", value: 40 },
+  { name: "Vehicle Defect", value: 25 },
+  { name: "Fatigue", value: 35 }
+];
+
+export const severityData = [
+  { name: "Fatal", value: 15, color: "#EF4444" },
+  { name: "Severe", value: 30, color: "#F97316" },
+  { name: "Moderate", value: 40, color: "#FACC15" },
+  { name: "Minor", value: 15, color: "#22C55E" }
+];
+
+export const timeOfDayData = [
+  { name: "Morning (6-9am)", value: 25 },
+  { name: "Day (9am-4pm)", value: 30 },
+  { name: "Evening (4-8pm)", value: 35 },
+  { name: "Night (8pm-6am)", value: 10 }
+];
+
+// For TimelineChart.tsx
+export const monthlyData = [
+  { name: "Jan", accidents: 65, riskIndex: 45 },
+  { name: "Feb", accidents: 59, riskIndex: 40 },
+  { name: "Mar", accidents: 80, riskIndex: 55 },
+  { name: "Apr", accidents: 81, riskIndex: 60 },
+  { name: "May", accidents: 56, riskIndex: 45 },
+  { name: "Jun", accidents: 55, riskIndex: 40 },
+  { name: "Jul", accidents: 40, riskIndex: 30 },
+  { name: "Aug", accidents: 45, riskIndex: 35 },
+  { name: "Sep", accidents: 62, riskIndex: 50 },
+  { name: "Oct", accidents: 75, riskIndex: 60 },
+  { name: "Nov", accidents: 85, riskIndex: 70 },
+  { name: "Dec", accidents: 79, riskIndex: 65 }
+];
+
+// For Index.tsx
+export const statsData = [
+  { title: "Total Accidents", value: "1,284", trend: "+12%", icon: "Car" },
+  { title: "Risk Index", value: "67/100", trend: "+5%", icon: "AlertTriangle" },
+  { title: "High Risk Zones", value: "23", trend: "+2", icon: "MapPin" },
+  { title: "Forecast Accuracy", value: "91%", trend: "+3%", icon: "Calendar" }
+];
