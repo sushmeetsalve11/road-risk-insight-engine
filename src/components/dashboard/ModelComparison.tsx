@@ -24,12 +24,9 @@ export function ModelComparison({ metrics, selectedModel }: {
   metrics: { type: string; metrics: { accuracy: number; precision: number; recall: number; f1Score: number; } }[];
   selectedModel: string;
 }) {
-  // Filter to only show active models (Neural Network, Random Forest, KNN, Gradient Boosting)
+  // Update the filter to only include specified models
   const activeModels = metrics.filter(m => 
-    m.type === "Neural Network" || 
-    m.type === "Random Forest" || 
-    m.type === "KNN" || 
-    m.type === "Gradient Boosting"
+    ["Gradient Boosting", "Random Forest", "KNN", "Neural Network"].includes(m.type)
   );
   
   const metricsData: MetricsData[] = activeModels.map(m => ({
@@ -45,14 +42,14 @@ export function ModelComparison({ metrics, selectedModel }: {
     <Card>
       <CardHeader>
         <div className="flex items-center justify-between">
-          <CardTitle>Active Models Comparison</CardTitle>
+          <CardTitle>Machine Learning Model Comparison</CardTitle>
           <TooltipProvider>
             <UITooltip>
               <TooltipTrigger>
                 <Info className="h-4 w-4 text-muted-foreground" />
               </TooltipTrigger>
               <TooltipContent>
-                <p>Comparison of active ML models based on key metrics</p>
+                <p>Comparison of key machine learning models</p>
               </TooltipContent>
             </UITooltip>
           </TooltipProvider>
