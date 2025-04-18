@@ -1,7 +1,6 @@
 
 import { Navbar } from "@/components/layout/Navbar";
 import { Footer } from "@/components/layout/Footer";
-import { RiskMap } from "@/components/dashboard/RiskMap";
 import { RiskFactorsChart } from "@/components/dashboard/RiskFactorsChart";
 import { ClusteringAnalysis } from "@/components/dashboard/ClusteringAnalysis";
 import { TimelineChart } from "@/components/dashboard/TimelineChart";
@@ -41,10 +40,6 @@ const Index = () => {
                 />
               );
             })}
-          </div>
-          
-          <div className="grid gap-4 md:grid-cols-3">
-            <RiskMap />
           </div>
           
           <div className="grid gap-4 md:grid-cols-3">
