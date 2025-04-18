@@ -67,14 +67,18 @@ export function RiskMap() {
         >
           <MapCenterSetter center={[20.5937, 78.9629]} zoom={5} />
           <TileLayer
+            tileSize={256}
+            opacity={1}
+            zIndex={1}
             attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
             url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
           />
           
           {indianAccidentData.map((accident, index) => (
             <Marker 
-              key={index} 
+              key={`marker-${index}`} 
               position={[accident.lat, accident.lng]} 
+              icon={getMarkerColor(accident.severity)}
             >
               <Popup>
                 <div>
