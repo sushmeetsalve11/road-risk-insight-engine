@@ -1,4 +1,3 @@
-
 // Mock dataset for Road Risk Insight Engine
 
 // Risk Map Data - Indian cities accidents
@@ -65,7 +64,7 @@ export const indianAccidentData = [
   { id: 60, city: "Delhi", lat: 28.6594, lng: 77.2226, severity: "high", description: "High accident near Delhi" },
   { id: 61, city: "Kolkata", lat: 22.5666, lng: 88.4021, severity: "medium", description: "Medium accident near Kolkata" },
   { id: 62, city: "Pune", lat: 18.5363, lng: 73.9047, severity: "low", description: "Low accident near Pune" },
-  { id: 63, city: "Hyderabad", lat: 17.4173, lng: 78.5253, severity: "low", description: "Low accident near Hyderabad" },
+  { id: 63, city: "Hyderabad", lat: 17.3596, lng: 78.5253, severity: "low", description: "Low accident near Hyderabad" },
   { id: 64, city: "Kolkata", lat: 22.5338, lng: 88.3618, severity: "high", description: "High accident near Kolkata" },
   { id: 65, city: "Hyderabad", lat: 17.3586, lng: 78.5107, severity: "medium", description: "Medium accident near Hyderabad" },
   { id: 66, city: "Mumbai", lat: 19.1172, lng: 72.8888, severity: "low", description: "Low accident near Mumbai" },
@@ -170,32 +169,33 @@ export const indianAccidentData = [
 
 // Additional mock datasets for dashboard components
 export const clusterData = [
-  // Cluster analysis data
-  { cluster: "High Risk", cities: ["Mumbai", "Delhi", "Kolkata"], risk: 0.85 },
-  { cluster: "Medium Risk", cities: ["Chennai", "Hyderabad", "Pune"], risk: 0.55 },
-  { cluster: "Low Risk", cities: ["Bangalore", "Rural Areas"], risk: 0.25 }
+  { name: "Urban Intersections", value: 25, color: "#0088FE" },
+  { name: "Highway Incidents", value: 35, color: "#00C49F" },
+  { name: "Weather-Related", value: 20, color: "#FFBB28" },
+  { name: "Night-Time", value: 15, color: "#FF8042" },
+  { name: "Vehicle Mechanical", value: 5, color: "#8884D8" }
 ];
 
 export const riskFactorData = [
-  { name: "Weather", value: 28 },
-  { name: "Time of Day", value: 22 },
-  { name: "Road Type", value: 18 },
-  { name: "Traffic Volume", value: 15 },
-  { name: "Speed Limit", value: 10 },
-  { name: "Vehicle Type", value: 7 }
+  { name: "Weather", value: 28, color: "#0088FE" },
+  { name: "Time of Day", value: 22, color: "#00C49F" },
+  { name: "Road Type", value: 18, color: "#FFBB28" },
+  { name: "Traffic Volume", value: 15, color: "#FF8042" },
+  { name: "Speed Limit", value: 10, color: "#8884D8" },
+  { name: "Vehicle Type", value: 7, color: "#82ca9d" }
 ];
 
 export const severityData = [
-  { name: "High", value: 35 },
-  { name: "Medium", value: 45 },
-  { name: "Low", value: 20 }
+  { name: "High", value: 35, color: "#FF8042" },
+  { name: "Medium", value: 45, color: "#FFBB28" },
+  { name: "Low", value: 20, color: "#00C49F" }
 ];
 
 export const timeOfDayData = [
-  { name: "Morning (6-10am)", value: 25 },
-  { name: "Midday (10am-3pm)", value: 20 },
-  { name: "Evening (3-8pm)", value: 35 },
-  { name: "Night (8pm-6am)", value: 20 }
+  { name: "Morning (6-10am)", value: 25, color: "#0088FE" },
+  { name: "Midday (10am-3pm)", value: 20, color: "#00C49F" },
+  { name: "Evening (3-8pm)", value: 35, color: "#FFBB28" },
+  { name: "Night (8pm-6am)", value: 20, color: "#FF8042" }
 ];
 
 export const monthlyData = [
@@ -208,9 +208,10 @@ export const monthlyData = [
 ];
 
 export const statsData = [
-  { name: "Total Accidents", value: 1500, trend: { value: 12, positive: true } },
-  { name: "High Risk Areas", value: 8, trend: { value: 3, positive: false } },
-  { name: "Average Severity", value: 2.5, trend: { value: 0.2, positive: true } }
+  { title: "Total Accidents", value: 1500, trend: { value: 12, positive: true }, icon: "Car" },
+  { title: "High Risk Areas", value: 8, trend: { value: 3, positive: false }, icon: "AlertTriangle" },
+  { title: "Average Severity", value: 2.5, trend: { value: 0.2, positive: true }, icon: "MapPin" },
+  { title: "Monthly Change", value: 15, trend: { value: 5, positive: true }, icon: "Calendar" }
 ];
 
 export const cityStats = {
@@ -222,6 +223,37 @@ export const cityStats = {
   Hyderabad: { accidentRate: 0.6, populationDensity: 0.65, trafficDensity: 0.6 },
   Pune: { accidentRate: 0.45, populationDensity: 0.5, trafficDensity: 0.45 }
 };
+
+// Add mock data for RiskFactors.tsx
+export const weatherData = [
+  { name: "Rain", value: 35, color: "#0088FE" },
+  { name: "Snow/Ice", value: 15, color: "#00C49F" },
+  { name: "Fog", value: 12, color: "#FFBB28" },
+  { name: "Wind", value: 8, color: "#FF8042" },
+  { name: "Clear", value: 30, color: "#8884D8" }
+];
+
+export const timeData = [
+  { name: "Rush Hour", value: 40, color: "#0088FE" },
+  { name: "Night", value: 25, color: "#00C49F" },
+  { name: "Weekend", value: 20, color: "#FFBB28" },
+  { name: "Holiday", value: 15, color: "#FF8042" }
+];
+
+export const roadData = [
+  { name: "Intersections", value: 30, color: "#0088FE" },
+  { name: "Highways", value: 25, color: "#00C49F" },
+  { name: "Rural Roads", value: 20, color: "#FFBB28" },
+  { name: "Bridges", value: 15, color: "#FF8042" },
+  { name: "Construction", value: 10, color: "#8884D8" }
+];
+
+export const driverData = [
+  { name: "Distracted", value: 35, color: "#0088FE" },
+  { name: "Speeding", value: 30, color: "#00C49F" },
+  { name: "Intoxicated", value: 25, color: "#FFBB28" },
+  { name: "Fatigue", value: 10, color: "#FF8042" }
+];
 
 // Add other necessary constants and data exports
 export const COLORS = ['#0088FE', '#00C49F', '#FFBB28', '#FF8042', '#8884D8'];
